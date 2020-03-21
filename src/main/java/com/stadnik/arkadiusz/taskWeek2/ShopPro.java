@@ -19,11 +19,12 @@ public class ShopPro implements ProductInterface {
     @Autowired
     public ShopPro(ProductService productService) {
         this.productService = productService;
+        addProduct();
     }
 
     @Override
-    public void addProduct(String productName, double price) {
-        productService.addProduct(productName, price);
+    public void addProduct() {
+        productService.addProduct("tacos", 121);
     }
 
     @Override

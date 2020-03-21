@@ -17,8 +17,8 @@ public class ShopStart implements ProductInterface {
     }
 
     @Override
-    public void addProduct(String productName, double price) {
-        productService.addProduct(productName, price);
+    public void addProduct() {
+        productService.addProduct("gyros", 15);
     }
 
     @Override

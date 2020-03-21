@@ -19,11 +19,12 @@ public class ShopPlus implements ProductInterface {
     @Autowired
     public ShopPlus(ProductService productService) {
         this.productService = productService;
+        addProduct();
     }
 
     @Override
-    public void addProduct(String productName, double price) {
-        productService.addProduct(productName, price);
+    public void addProduct() {
+        productService.addProduct("Pizza", 200);
     }
 
     @EventListener(ApplicationReadyEvent.class)
