@@ -22,9 +22,10 @@ public class ProductService {
     }
 
     public double getRandomNumber() {
-        Random randomNumber = new Random();
-        double randomPrice = randomNumber.nextDouble() * 3 + 1;
-        return randomPrice;
+        double leftLimit = 5D;
+        double rightLimit = 300D;
+        double generatedDouble = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
+        return generatedDouble;
     }
 
     public void printAllProducts() {
@@ -35,12 +36,12 @@ public class ProductService {
         productList.add(new Product(productName, price));
     }
 
-    public void PrintTotalPrice() {
+    public double PrintTotalPrice() {
         double sumPrice = 0;
         for (Product product : productList) {
             sumPrice = sumPrice + product.getPrice();
         }
-        System.out.println(String.format("%.2f",sumPrice));
+        return sumPrice;
     }
 
     @Override

@@ -1,18 +1,23 @@
 package com.stadnik.arkadiusz.taskWeek2;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ShopStart implements ProductInterface {
+@Profile("plus")
+@ConfigurationProperties(prefix = "tax")
+public class ShopPlus implements ProductInterface {
 
     ProductService productService;
 
+    private int vat;
+
     @Autowired
-    public ShopStart(ProductService productService) {
+    public ShopPlus(ProductService productService) {
         this.productService = productService;
     }
 
@@ -21,11 +26,18 @@ public class ShopStart implements ProductInterface {
         productService.addProduct(productName, price);
     }
 
-    @Override
     @EventListener(ApplicationReadyEvent.class)
+    @Override
     public void printSumPrices() {
-        double price = productService.PrintTotalPrice();
-        System.out.println("Nett price " + String.format("%.2f", price));
+        double priceWithTax = productService.PrintTotalPrice() * (1.0 + (vat / 100.0));
+        System.out.println("Price with TAX " + String.format("%.2f", priceWithTax));
+    }
 
+    public int getVat() {
+        return vat;
+    }
+
+    public void setVat(int vat) {
+        this.vat = vat;
     }
 }
