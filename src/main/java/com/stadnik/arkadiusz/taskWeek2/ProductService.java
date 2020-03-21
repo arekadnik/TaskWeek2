@@ -27,20 +27,20 @@ public class ProductService {
         return randomPrice;
     }
 
-    public void printAllProducts(List<Product> products) {
-        products.forEach(System.out::println);
+    public void printAllProducts() {
+        productList.forEach(System.out::println);
     }
 
     public void addProduct(String productName, double price) {
         productList.add(new Product(productName, price));
     }
 
-    public void totalPrice(List<Product> productList) {
+    public void PrintTotalPrice() {
         double sumPrice = 0;
         for (Product product : productList) {
             sumPrice = sumPrice + product.getPrice();
         }
-        System.out.println(sumPrice);
+        System.out.println(String.format("%.2f",sumPrice));
     }
 
     @Override
